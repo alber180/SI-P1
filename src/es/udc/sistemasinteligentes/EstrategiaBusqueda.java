@@ -6,5 +6,5 @@ public interface EstrategiaBusqueda {
      * @param p Problema a solucionar
      * @return Estado meta obtenido
      */
-    public abstract Estado soluciona(ProblemaBusqueda p) throws Exception;
+    public abstract Nodo[] soluciona(ProblemaBusqueda p) throws Exception;
 }
