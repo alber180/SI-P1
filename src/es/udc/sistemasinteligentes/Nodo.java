@@ -38,9 +38,9 @@ public class Nodo {
 
     @Override
     public String toString() {
-        return  "( " + estado +
-                ", " + padre  +
-                ", " + accion +
-                ')';
+        return "( Estado: " + estado +
+                ", Estado Padre: " + (padre != null ? padre.getEstado() : "null") +
+                ", Acción: " + (accion != null ? accion : "null") + " )\n";
     }
+
 }

@@ -2,6 +2,7 @@ package es.udc.sistemasinteligentes.ejemplo;
 
 import es.udc.sistemasinteligentes.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Estrategia4 implements EstrategiaBusqueda {
 
@@ -36,8 +37,6 @@ public class Estrategia4 implements EstrategiaBusqueda {
                     nodoHijo = new Nodo(estadoActual, nodo, acc);
                     nodo = nodoHijo;
 
-                    // Mirar lo de estado actual para poner el padre
-
                     explorados.add(estadoActual);
                     modificado = true;
                     System.out.println((i++) + " - Estado actual cambiado a " + estadoActual);
@@ -50,7 +49,7 @@ public class Estrategia4 implements EstrategiaBusqueda {
         }
         System.out.println((i++) + " - FIN - " + estadoActual);
         // Mandas todos con new 0
-        return reconstruyeSol(nodoHijo).toArray(new Nodo[0]);
+        return reconstruyeSol(nodoHijo == null ? nodo : nodoHijo).toArray(new Nodo[0]);
     }
 
     public ArrayList<Nodo> reconstruyeSol(Nodo n){
@@ -60,6 +59,7 @@ public class Estrategia4 implements EstrategiaBusqueda {
             sol.add(nodo);
             nodo = nodo.getPadre();
         }
+        Collections.reverse(sol);
         return sol;
     }
 }
