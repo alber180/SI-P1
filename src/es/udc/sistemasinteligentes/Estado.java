@@ -11,5 +11,4 @@ public abstract class Estado {
 
     @Override
     public abstract int hashCode();
-
 }
