@@ -71,7 +71,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda {
         public String toString() {
             StringBuilder cad = new StringBuilder();
 
-            cad.append("[");
+            cad.append("\n");
             for (int i = 0; i < n; i++) {
                 cad.append("(");
 
@@ -81,7 +81,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda {
 
                 cad.append(" )\n");
             }
-            cad.append("]");
+            cad.append("\n");
 
             return cad.toString();
         }

@@ -9,7 +9,7 @@ public class EstrategiaBusquedaGrafo implements EstrategiaBusqueda {
 
     @Override
     public Nodo[] soluciona(ProblemaBusqueda p) throws Exception {
-        // Cola para nodos pendientes de explorar
+        // Cola
         Queue<Nodo> frontera = new LinkedList<>();
 
         // Conjunto de estados ya explorados
@@ -17,7 +17,8 @@ public class EstrategiaBusquedaGrafo implements EstrategiaBusqueda {
 
         Estado estadoInicial = p.getEstadoInicial();
         Nodo nodoInicial = new Nodo(estadoInicial, null, null);
-        frontera.add(nodoInicial); // Agregar el nodo inicial a la frontera
+        // Metemos el nodo inicial a la cola
+        frontera.add(nodoInicial);
 
         int i = 1;
         System.out.println((i++) + " - Empezando búsqueda en " + estadoInicial);

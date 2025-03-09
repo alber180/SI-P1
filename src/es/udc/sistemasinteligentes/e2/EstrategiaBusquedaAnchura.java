@@ -1,7 +1,6 @@
 package es.udc.sistemasinteligentes.e2;
 
 import es.udc.sistemasinteligentes.*;
-
 import java.util.*;
 
 public class EstrategiaBusquedaAnchura implements EstrategiaBusqueda {
@@ -22,36 +21,44 @@ public class EstrategiaBusquedaAnchura implements EstrategiaBusqueda {
         frontera.add(nodoInicial); // Agregar el nodo inicial a la frontera
 
         int i = 1;
-        System.out.println((i++) + " - Empezando búsqueda en " + estadoInicial);
+        int nodosExpandidos = 0;
+        int nodosCreados = 1; // ya se ha creado el nodo inicial
+
+        System.out.println((i++) + " - Iniciando búsqueda desde el estado inicial:\n" + estadoInicial);
 
         while (!frontera.isEmpty()) {
-            // El poll saca el primero de la cola
+            // Se extrae el primer nodo de la cola
             Nodo nodoActual = frontera.poll();
+            nodosExpandidos++;  // Se expande este nodo
             Estado estadoActual = nodoActual.getEstado();
 
             if (p.esMeta(estadoActual)) {
-                System.out.println((i++) + " - FIN - " + estadoActual);
+                System.out.println((i++) + " - ¡Estado meta alcanzado!\n" + estadoActual);
+                System.out.println("Nodos expandidos: " + nodosExpandidos);
+                System.out.println("Nodos creados: " + nodosCreados);
                 return reconstruyeSol(nodoActual).toArray(new Nodo[0]);
             }
 
-            System.out.println((i++) + " - " + estadoActual + " no es meta");
-            // Lo ponemos antes del foreach para evitar explorados repes (creo)
+            System.out.println((i++) + " - Estado actual no es meta:\n" + estadoActual);
+            // Se marca el estado actual como explorado
             explorados.add(estadoActual);
 
             for (Accion acc : p.acciones(estadoActual)) {
                 Estado sc = p.result(estadoActual, acc);
-                System.out.println((i++) + " - RESULT(" + estadoActual + "," + acc + ")=" + sc);
+                System.out.println((i++) + " - Aplicando acción: " + acc);
+                System.out.println((i++) + " - Resultado obtenido:\n" + sc);
 
-                // Verifica que el estado sc no haya sido explorado y que no esté ya en la frontera (nodos pendientes de explorar)
+                // Verifica que el estado 'sc' no esté ya explorado y que no se encuentre en la cola
                 if (!explorados.contains(sc) && frontera.stream().noneMatch(n -> n.getEstado().equals(sc))) {
                     Nodo nodoHijo = new Nodo(sc, nodoActual, acc);
                     frontera.add(nodoHijo);
-                    System.out.println((i++) + " - " + sc + " agregado a la cola");
+                    nodosCreados++; // Se crea un nuevo nodo
+                    System.out.println((i++) + " - Estado agregado a la cola:\n" + sc);
                 } else {
-                    System.out.println((i++) + " - " + sc + " ya está explorado o bien en la cola");
+                    System.out.println((i++) + " - Estado ya explorado o presente en la cola:\n" + sc);
                 }
-
             }
+            System.out.println("---------------------------------------------------");
         }
 
         throw new Exception("No se ha podido encontrar una solución");
