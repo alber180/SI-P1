@@ -23,6 +23,14 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda {
         }
 
 
+        public int[][] getCuadradoMagico() {
+            return cuadradoMagico;
+        }
+
+        public int getN() {
+            return n;
+        }
+
         public int getNumeroMagico() {
             return (n * (n * n + 1) / 2);
         }
